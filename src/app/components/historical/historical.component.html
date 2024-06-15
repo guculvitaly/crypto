@@ -1,0 +1,22 @@
+<div class="container">
+    <p-card header="Charting data:">
+        <div class=" historical-container">
+            <div class="center-screen flex-container">
+                <div class="centered-content">
+                    <ng-container *ngIf="!isDataLoaded; else chartContent">
+                        <p-progressSpinner></p-progressSpinner>
+                    </ng-container>
+                    <ng-template #chartContent>
+                        <div class="chart-container">
+                            <p-chart width="auto" height="650px" type="line" [data]="data" [options]="options"></p-chart>
+                            <span class="history-sub-text p-card-title"><h4>historical prices</h4></span>
+                        </div>
+                        
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </p-card>
+    
+    
+</div>

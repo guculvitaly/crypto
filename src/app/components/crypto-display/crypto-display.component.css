@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+.sub-btn{
+  float: right;
+}
+.market-container{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  justify-items: center;
+  width: 100%;
+}
+.market-row{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f0f0; 
+  padding: 10px;
+  border: 1px solid #ccc; 
+  width: 100%; 
+  text-align: center; 
+}
+
+.subtext {
+  margin-top: 10px; 
+  color: #666;
+  font-weight: bold; 
+}
+
+.chose{
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+.market-data-container{
+  margin-bottom: 40px;
+}

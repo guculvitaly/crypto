@@ -1,0 +1,30 @@
+.flex-container {
+    display: flex;
+    /* height: 100vh; */
+    width: 100%;    
+  }
+  .center-screen{
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .centered-content{
+    width: 100%;
+    text-align: center;
+  }
+
+  .historical-container{
+    margin-top: 40px;
+  }
+
+  .history-sub-text{
+    position: absolute;
+    right: 10px;
+  }
+
+  .history-sub-text h2{
+    margin: 0;
+  }
+  .chart-container {
+    position: relative;
+  }
