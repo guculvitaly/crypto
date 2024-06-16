@@ -1,7 +1,11 @@
 # CryptoMarketApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
-Used libraries: PrimeNg(https://primeng.org/)
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4 and used [**CoinAPI**](https://www.coinapi.io/) for data.
+
+**API** documentation located by this [url](https://docs.coinapi.io/#md-docs)
+
+# Used libraries 
+[PrimeNg](https://primeng.org/)
 
 ## Development server
 
