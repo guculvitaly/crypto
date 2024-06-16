@@ -5,7 +5,8 @@
                 <div class="col">
 
                     <p-dropdown [options]="cryptos" [(ngModel)]="selectedCrypto" optionLabel="name" placeholder="Select"
-                        (onChange)="onChangeDropdown()" />
+                        (onChange)="onChangeDropdown()" autoWidth="false"
+                        [style]="{ minWidth: '150px', width: '20%' }" />
 
                     <p-button label="Subscribe" severity="info" [raised]="true" size="small" class="sub-btn"
                         [disabled]="isDisabledBtn" (onClick)="onSubscrButtonClick()" />
