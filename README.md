@@ -1,6 +1,7 @@
 # CryptoMarketApp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.4.
+Used libraries: PrimeNg(https://primeng.org/)
 
 ## Development server
 
