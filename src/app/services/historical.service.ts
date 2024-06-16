@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { AppSettings } from '../app.settings';
 
@@ -18,7 +17,7 @@ export class HistoricalService {
   private messageQueue: any[] = [];
   private isConnected = false;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.initWebSocket();
    }
 
@@ -83,6 +82,7 @@ export class HistoricalService {
   }
 
   setSelectedCrypto(crypto: string): void {
+
     if (this.selectedCrypto) {
       this.updateSubscription('unsubscribe', this.selectedCrypto);
     }

@@ -19,28 +19,36 @@
 </div>
 <div class="market-data-container">
     <div class="container">
-        <div class="row">
-            <p-card header="Market data:">
-                <div class="market-container">
-                    <div class="market-row">
-                        <div class="item">
-                            <div>Symbol</div>
-                            <div class="subtext">{{symbol}}</div>
-                        </div>
-                        <div class="item">
-                            <div>Price</div>
-                            <div class="subtext">{{ cryptoPrice | currency:'USD' }}</div>
-                        </div>
-                        <div class="item">
-                            <div>Time</div>
-                            <div class="subtext">{{ lastUpdate}}</div>
-                        </div>
-                    </div>
+      <div class="row">
+        <p-card header="Market data:">
+          <ng-container *ngIf="!hasError; else errorTemplate">
+           
+            <ng-template #marketDataTemplate>
+              <div class="market-container">
+                <div class="market-row">
+                  <div class="item">
+                    <div>Symbol</div>
+                    <div class="subtext">{{symbol}}</div>
+                  </div>
+                  <div class="item">
+                    <div>Price</div>
+                    <div class="subtext">{{ cryptoPrice | currency:'USD' }}</div>
+                  </div>
+                  <div class="item">
+                    <div>Time</div>
+                    <div class="subtext">{{ lastUpdate }}</div>
+                  </div>
                 </div>
-            </p-card>
-        </div>
+              </div>
+            </ng-template>
+          </ng-container>
+          <ng-template #errorTemplate>
+            <div class="error-message">{{ errorMessage }}</div>
+          </ng-template>
+        </p-card>
+      </div>
     </div>
-</div>
+  </div>
 <div *ngIf="isSubscribe">
     <app-historical [isSubscribed]="isSubscribe" [cryptoSymbolId]="symbol_Id" [labelForDataSet]="labelDataset" />
 </div>

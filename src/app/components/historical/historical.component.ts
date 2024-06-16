@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { HistoricalService } from '../../services/historical.service';
 import { Subscription } from 'rxjs';
@@ -14,13 +14,13 @@ import { CardModule } from 'primeng/card';
   styleUrl: './historical.component.css',
   
 })
-export class HistoricalComponent {
+export class HistoricalComponent implements OnChanges{
   @Input() isSubscribed!: boolean;
-  @Input() cryptoSymbolId!: string;
-  @Input() labelForDataSet!: string;
+  @Input() cryptoSymbolId: string = '';
+  @Input() labelForDataSet: string = '';
 
-  data: any;
-  options: any;
+  data: any = {};
+  options: any = {};
   isUpdating: boolean = false;
   isDataLoaded: boolean = false;
   cryptoPrice: any;
@@ -32,73 +32,82 @@ export class HistoricalComponent {
 
   constructor(private historicalService: HistoricalService, private datePipe: DatePipe) { }
 
+  ngOnChanges(changes: SimpleChanges):void{
+    if(changes['cryptoSymbolId'] && changes['cryptoSymbolId'].currentValue){
+      this.fetchData();
+      
+    }
+  }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+
+  fetchData():void{
+    this.isDataLoaded = false;
+    this.dataSet = [];
+    this.labelData = [];
     this.historicalService.setSelectedCrypto(this.cryptoSymbolId);
-    this.userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--text-color');
-    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
-
-
     this.historicalService.getPriceUpdates().subscribe(resp => {
-      if (resp) {
+      if (resp){
         this.isDataLoaded = true;
         const date = new Date(resp.time_exchange);
         let time_exchange = this.datePipe.transform(date, 'yyyy.MM.dd HH:mm:ss', this.userTimeZone);
         this.dataSet.push(resp.price);
         this.labelData.push(time_exchange!);
-        this.data = {
-          labels: this.labelData,
-          datasets: [
-            {
-              label: this.labelForDataSet,
-              data: this.dataSet,
-              fill: false,
-              borderColor: documentStyle.getPropertyValue('--blue-500'),
-              tension: 0.4
-            }
-          ]
-        };
-        this.options = {
-          maintainAspectRatio: false,
-          aspectRatio: 0.6,
-          plugins: {
-            legend: {
-              labels: {
-                color: textColor
-              }
-            }
-          },
-          scales: {
-            x: {
-              ticks: {
-                color: textColorSecondary
-              },
-              grid: {
-                color: surfaceBorder,
-                drawBorder: false
-              }
-            },
-            y: {
-              ticks: {
-                color: textColorSecondary
-              },
-              grid: {
-                color: surfaceBorder,
-                drawBorder: false
-              }
-            }
-          }
-        };
+        this.updateChart();
       }
-
     });
   }
 
+  updateChart(): void {
+    const documentStyle = getComputedStyle(document.documentElement);
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
 
-
+    this.data = {
+      labels: this.labelData,
+      datasets: [
+        {
+          label: this.labelForDataSet,
+          data: this.dataSet,
+          fill: false,
+          borderColor: documentStyle.getPropertyValue('--blue-500'),
+          tension: 0.4
+        }
+      ]
+    };
+    this.options = {
+      maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      plugins: {
+        legend: {
+          labels: {
+            color: textColor
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: {
+            color: textColorSecondary
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
+          }
+        },
+        y: {
+          ticks: {
+            color: textColorSecondary
+          },
+          grid: {
+            color: surfaceBorder,
+            drawBorder: false
+          }
+        }
+      }
+    };
+  }
 }
 
