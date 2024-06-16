@@ -12,6 +12,7 @@ import { HistoricalComponent } from "../historical/historical.component";
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessagesModule } from 'primeng/messages';
 interface Crypto {
   name: string;
   code: string;
@@ -32,7 +33,8 @@ interface Crypto {
         ButtonModule,
         CardModule,
         HistoricalComponent,
-        ProgressSpinnerModule
+        ProgressSpinnerModule,
+        MessagesModule
     ],
     providers: [DatePipe]
 })
